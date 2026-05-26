@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Full Body Hypertrophy</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#080808;
+  --black2:#111111;
+  --lime:#c8f020;
+  --lime-dark:#a8cc10;
+  --white:#ffffff;
+  --gray:#888888;
+  --gray2:#444444;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--white);font-family:'Space Grotesk',sans-serif;font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased;}
+.mono{font-family:'Space Mono',monospace;}
+
+/* ── NAV ── */
+.nav{
+  position:sticky;top:0;z-index:300;
+  background:var(--black);
+  border-bottom:3px solid var(--lime);
+  display:flex;align-items:stretch;
+}
+.nav-tab{
+  flex:1;padding:16px 8px 13px;
+  text-align:center;
+  font-family:'Space Mono',monospace;
+  font-size:10px;font-weight:700;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--gray);
+  cursor:pointer;
+  border-bottom:3px solid transparent;
+  margin-bottom:-3px;
+  transition:color .15s,border-color .15s;
+  -webkit-tap-highlight-color:transparent;user-select:none;
+}
+.nav-tab.on{color:var(--lime);border-bottom-color:var(--lime);}
+
+.pg{display:none;}
+.pg.on{display:block;}
+
+/* ── HERO ── */
+.hero{
+  background:var(--black);
+  padding:40px 24px 0;
+}
+.hero-eyebrow{
+  font-family:'Space Mono',monospace;
+  font-size:10px;font-weight:400;
+  letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--lime);margin-bottom:20px;
+}
+.hero-title{
+  font-family:'Space Mono',monospace;
+  font-size:clamp(52px,14vw,88px);
+  font-weight:700;line-height:0.9;
+  text-transform:uppercase;
+  letter-spacing:-0.02em;
+  color:var(--white);
+  margin-bottom:0;
+}
+.hero-title .accent{color:var(--lime);}
+.hero-sub{
+  font-family:'Space Mono',monospace;
+  font-size:11px;font-weight:400;
+  letter-spacing:0.08em;text-transform:uppercase;
+  color:var(--gray);
+  padding:16px 0 0;
+  line-height:1.6;
+}
+
+/* stats bar */
+.stats-bar{
+  display:flex;
+  margin-top:32px;
+  border-top:1px solid var(--gray2);
+  border-bottom:1px solid var(--gray2);
+}
+.stat{
+  flex:1;padding:16px 0;text-align:center;
+  border-right:1px solid var(--gray2);
+}
+.stat:last-child{border-right:none;}
+.stat-n{
+  font-family:'Space Mono',monospace;
+  font-size:32px;font-weight:700;
+  color:var(--lime);line-height:1;margin-bottom:4px;
+}
+.stat-l{
+  font-size:9px;font-weight:500;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--gray);
+}
+
+.phase-band{
+  padding:16px 24px 14px;
+}
+.phase-band.upper{background:var(--black2);border-top:1px solid var(--gray2);}
+.phase-band.lower{background:var(--lime);}
+.phase-band.arms{background:var(--black);}
+
+.phase-band.upper .phase-name{color:var(--lime);}
+.phase-band.lower .phase-name{color:var(--black);}
+.phase-band.arms .phase-name{color:var(--white);}
+
+.phase-name{
+  font-family:'Space Mono',monospace;
+  font-size:24px;font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:-0.01em;line-height:1;
+}
+
+/* ── EXERCISE ── */
+.ex{
+  background:var(--black);
+  border-bottom:1px solid var(--gray2);
+  padding:0;
+}
+.ex-body{padding:18px 24px 0;}
+.ex-top{display:flex;gap:14px;align-items:flex-start;margin-bottom:10px;}
+.ex-num{
+  font-family:'Space Mono',monospace;
+  font-size:11px;font-weight:700;
+  color:var(--gray2);
+  letter-spacing:0.06em;
+  flex-shrink:0;width:22px;
+  padding-top:4px;
+}
+.ex-main{flex:1;min-width:0;}
+.ex-name{
+  font-family:'Space Mono',monospace;
+  font-size:17px;font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:0.01em;
+  color:var(--white);
+  line-height:1.15;margin-bottom:3px;
+}
+.ex-target{
+  font-size:11px;font-weight:400;
+  color:var(--gray);letter-spacing:0.03em;
+}
+.ex-chips{
+  display:flex;flex-wrap:wrap;gap:5px;
+  padding:0 24px 0 60px;margin-bottom:0;
+}
+.chip{
+  font-family:'Space Mono',monospace;
+  font-size:10px;font-weight:700;
+  letter-spacing:0.06em;text-transform:uppercase;
+  padding:5px 10px;
+}
+.chip-sets{background:var(--lime);color:var(--black);font-size:15px;padding:6px 14px;letter-spacing:0.02em;}
+.chip-lower{background:var(--lime);color:var(--black);font-size:15px;padding:6px 14px;letter-spacing:0.02em;}
+.chip-arms{background:var(--white);color:var(--black);font-size:15px;padding:6px 14px;letter-spacing:0.02em;}
+
+
+.chip-rest{background:transparent;color:var(--gray2);border:1px solid var(--gray2);}
+.chip-posture{background:transparent;color:var(--lime);border:1px solid var(--lime);}
+
+/* cue */
+.cue-row{
+  display:flex;align-items:center;gap:6px;
+  padding:10px 24px 14px 60px;
+  cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none;
+}
+.cue-lbl{
+  font-family:'Space Mono',monospace;
+  font-size:9px;font-weight:700;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--gray2);
+}
+.cue-arr{font-size:9px;color:var(--gray2);transition:transform .2s;}
+.ex.open .cue-arr{transform:rotate(180deg);}
+.cue-body{
+  display:none;
+  padding:0 24px 16px 60px;
+  font-size:12px;font-weight:400;
+  color:var(--gray);line-height:1.75;
+  border-left:2px solid var(--lime);
+  margin-left:24px;padding-left:14px;
+  margin-right:24px;margin-bottom:4px;
+}
+.ex.open .cue-body{display:block;}
+
+/* lime-bg exercise (lower block on lime) */
+.ex.lime-ex{background:var(--lime);}
+.ex.lime-ex .ex-name{color:var(--black);}
+.ex.lime-ex .ex-target{color:rgba(0,0,0,0.5);}
+.ex.lime-ex .ex-num{color:rgba(0,0,0,0.25);}
+.ex.lime-ex .cue-lbl{color:rgba(0,0,0,0.35);}
+.ex.lime-ex .cue-arr{color:rgba(0,0,0,0.35);}
+.ex.lime-ex .cue-body{color:rgba(0,0,0,0.6);border-left-color:var(--black);}
+.ex.lime-ex .chip-lower{background:var(--black);color:var(--lime);}
+.ex.lime-ex .chip-rest{border-color:rgba(0,0,0,0.2);color:rgba(0,0,0,0.4);}
+.ex.lime-ex .chip-posture{border-color:var(--black);color:var(--black);}
+.ex.lime-ex{border-bottom-color:rgba(0,0,0,0.12);}
+
+/* gap between phases */
+.gap{height:4px;background:var(--black);}
+
+/* ── TEMPO BOX ── */
+
+
+
+
+.lime-tb 
+
+.lime-tb 
+
+.lime-tb 
+
+
+/* ── INFO PAGE ── */
+.info-hero{background:var(--black);padding:40px 24px 32px;}
+.info-title{
+  font-family:'Space Mono',monospace;
+  font-size:clamp(42px,11vw,72px);
+  font-weight:700;line-height:0.88;
+  text-transform:uppercase;
+  color:var(--white);
+  margin-bottom:14px;
+}
+.info-title .accent{color:var(--lime);}
+.info-tagline{
+  font-size:11px;font-weight:400;
+  color:var(--gray);letter-spacing:0.06em;line-height:1.75;
+}
+
+.info-sec{
+  padding:24px 24px 20px;
+  border-bottom:1px solid var(--gray2);
+}
+.info-sec:nth-child(even){background:var(--black2);}
+.info-sec-title{
+  font-family:'Space Mono',monospace;
+  font-size:9px;font-weight:700;
+  letter-spacing:0.22em;text-transform:uppercase;
+  color:var(--lime);margin-bottom:14px;
+}
+.info-item{
+  padding:10px 0;border-bottom:1px solid var(--gray2);
+  font-size:12px;color:var(--gray);line-height:1.75;
+}
+.info-item:last-child{border-bottom:none;}
+.info-item b{color:var(--white);font-weight:600;}
+
+.vol-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:9px 0;border-bottom:1px solid var(--gray2);
+}
+.vol-row:last-child{border-bottom:none;}
+.vol-label{font-size:11px;color:var(--gray);}
+.vol-val{
+  font-family:'Space Mono',monospace;
+  font-size:13px;font-weight:700;color:var(--lime);
+}
+
+.prog-sec{background:var(--lime);padding:24px;}
+.prog-title{
+  font-family:'Space Mono',monospace;
+  font-size:9px;font-weight:700;
+  letter-spacing:0.22em;text-transform:uppercase;
+  color:rgba(0,0,0,0.4);margin-bottom:10px;
+}
+.prog-body{
+  font-size:13px;font-weight:400;
+  color:var(--black);line-height:1.75;
+}
+.prog-body b{font-weight:700;}
+
+footer{
+  background:var(--black);
+  padding:24px 24px 48px;
+  border-top:3px solid var(--lime);
+  font-family:'Space Mono',monospace;
+  font-size:9px;font-weight:400;
+  color:var(--gray2);line-height:1.85;letter-spacing:0.03em;
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-tab on" onclick="show('a',this)">Session A</div>
+  <div class="nav-tab" onclick="show('b',this)">Session B</div>
+  <div class="nav-tab" onclick="show('info',this)">About</div>
+</nav>
+
+
+<!-- ═══════════ SESSION A ═══════════ -->
+<div class="pg on" id="pg-a">
+
+  <div class="hero">
+    <div class="hero-eyebrow">Full body · Session one</div>
+    <div class="hero-title">WORK<br>OUT <span class="accent">A</span></div>
+    <div class="hero-sub">Incline press · Pulldown · RDL · Arms</div>
+    <div class="stats-bar">
+      <div class="stat"><div class="stat-n">60</div><div class="stat-l">Minutes</div></div>
+      <div class="stat"><div class="stat-n">42</div><div class="stat-l">Upper</div></div>
+      <div class="stat"><div class="stat-n">10</div><div class="stat-l">Lower</div></div>
+      <div class="stat"><div class="stat-n">8</div><div class="stat-l">Arms</div></div>
+    </div>
+  </div>
+
+  <!-- UPPER A -->
+  <div class="phase-band upper">
+    <div class="phase-name">Upper body</div>
+  </div>
+
+  <div class="ex">
+    <div class="ex-body">
+      <div class="ex-top"><div class="ex-num">01</div><div class="ex-main"><div class="ex-name">Incline DB press</div><div class="ex-target">Clavicular pec · Anterior delt</div></div></div>
+    </div>
+    <div class="ex-chips"><span class="chip chip-sets">3 × 8–12</span><span class="chip chip-rest">Rest 90 s</span></div>
+    <div class="cue-row" onclick="cue(this)"><span class="cue-lbl">Cue &amp; rationale</span><span class="cue-arr">▾</span></div>
+    <div class="cue-body">30–45° incline maximises upper pec stretch at the lengthened position — superior EMG vs flat press at this angle (Lauver et al., 2016). Lower with full control; the eccentric is where most of the stimulus lives. Superset with the pulldown to save time.</div>
+  </div>
+
+  <div class="ex">
+    <div class="ex-body">
+      <div class="ex-top"><div class="ex-num">02</div><div class="ex-main"><div class="ex-name">Pull-up / lat pulldown</div><div class="ex-target">Latissimus dorsi · Biceps</div></div></div>
+    </div>
+    <div class="ex-chips"><span class="chip chip-sets">3 × 8–12</span><span class="chip chip-rest">Rest 90 s</span></div>
+    <div class="cue-row" onclick="cue(this)"><span class="cue-lbl">Cue &amp; rationale</span><span class="cue-arr">▾</span></div>
+    <div class="cue-body">Dead-hang at the bottom on every rep — the full lat stretch is the stimulus. Shoulder-width neutral or pronated grip. Overhead pulling is the highest lat activator (Signorile et al., 2002).</div>
+  </div>
+
+  <div class="ex">
+    <div class="ex-body">
+      <div class="ex-top"><div class="ex-num">03</div><div class="ex-main"><div class="ex-name">Cable lateral raise</div><div class="ex-target">Medial deltoid</div></div></div>
+    </div>
+    <div class="ex-chips"><span class="chip chip-sets">2 × 15–20</span><span class="chip chip-rest">Rest 50 s</span></div>
+    <div class="cue-row" onclick="cue(this)"><span class="cue-lbl">Cue &amp; rationale</span><span class="cue-arr">▾</span></div>
+    <div class="cue-body">Cable crosses in front of hips. Constant tension through the full arc — outperforms dumbbell in force-angle curve. Slight forward lean loads the medial delt at a longer muscle length.</div>
+  </div>
+
+  <div class="ex">
+    <div class="ex-body">
+      <div class="ex-top"><div class="ex-num">04</div><div class="ex-main"><div class="ex-name">DB pullover</div><div class="ex-target">Pec sternal · Serratus · Lat</div></div></div>
+    </div>
+    <div class="ex-chips"><span class="chip chip-sets">2 × 12–15</span><span class="chip chip-rest">Rest 60 s</span></div>
+    <div class="cue-row" onclick="cue(this)"><span class="cue-lbl">Cue &amp; rationale</span><span class="cue-arr">▾</span></div>
+    <div class="cue-body">Flat bench, arms nearly straight, lower the dumbbell behind the head to full shoulder flexion. Loads the sternal pec at the lengthened position a press cannot reach. Keep hips on the bench throughout.</div>
+  </div>
+
+  <div class="ex">
+    <div class="ex-body">
+      <div class="ex-top"><div class="ex-num">05</div><div class="ex-main"><div class="ex-name">Face pull</div><div class="ex-target">Rear delt · External rotators</div></div></div>
+    </div>
+    <div class="ex-chips"><span class="chip chip-sets">2 × 15–20</span><span class="chip chip-posture">↑ Posture</span><span class="chip chip-rest">Rest 45 s</span></div>
+    <div class="cue-row" onclick="cue(this)"><span class="cue-lbl">Cue &amp; rationale</span><span class="cue-arr">▾</span></div>
+    <div class="cue-body">Rope attachment, pull to forehead, elbows flared high. The postural antagonist to every pressing and serving movement. Trains external rotation — non-negotiable every session.</div>
+  </div>
+
+  <div class="gap"></div>
+
+  <!-- LOWER A -->
+  <div class="phase-band lower">
+    <div class="phase-name">Lower body</div>
+  </div>
+
+  <div class="ex lime-ex">
+    <div class="ex-body">
+      <div class="ex-top"><div class="ex-num">06</div><div class="ex-main"><div class="ex-name">Romanian deadlift</div><div class="ex-target">Hamstrings · Glutes</div></div></div>
+    </div>
+    <div class="ex-chips"><span class="chip chip-lower">3 × 10–12</span><span class="chip chip-rest">Rest 75 s</span></div>
+    <div class="cue-row" onclick="cue(this)"><span class="cue-lbl">Cue &amp; rationale</span><span class="cue-arr">▾</span></div>
+    <div class="cue-body">Hip hinge to mid-shin. Low spinal shear vs conventional deadlift. Superior hamstring lengthening — stretch-position hypertrophy (Maeo et al., 2021). Tennis covers quads; this fills the posterior chain gap.</div>
+  </div>
+
+  <div class="ex lime-ex">
+    <div class="ex-body">
+      <div class="ex-top"><div class="ex-num">07</div><div class="ex-main"><div class="ex-name">Leg extension</div><div class="ex-target">Rectus femoris · Vastus lateralis</div></div></div>
+    </div>
+    <div class="ex-chips"><span class="chip chip-lower">2 × 12–15</span><span class="chip chip-rest">Rest 60 s</span></div>
+    <div class="cue-row" onclick="cue(this)"><span class="cue-lbl">Cue &amp; rationale</span><span class="cue-arr">▾</span></div>
+    <div class="cue-body">Recline the seat slightly — lengthened hip position maximises rectus femoris stretch. Isolates the quad head most under-recruited during tennis. Extend to full lockout each rep.</div>
+  </div>
+
+  <div class="gap"></div>
+
+  <!-- ARMS A -->
+  <div class="phase-band arms">
+    <div class="phase-name">Arm block</div>
+  </div>
+
+  <div class="ex">
+    <div class="ex-body">
+      <div class="ex-top"><div class="ex-num">08</div><div class="ex-main"><div class="ex-name">Incline DB curl</div><div class="ex-target">Biceps long head</div></div></div>
+    </div>
+    <div class="ex-chips"><span class="chip chip-arms">2 × 10–15</span><span class="chip chip-rest">Rest 50 s</span></div>
+    <div class="cue-row" onclick="cue(this)"><span class="cue-lbl">Cue &amp; rationale</span><span class="cue-arr">▾</span></div>
+    <div class="cue-body">Shoulder in extension on the incline bench. Lengthened position produces significantly more hypertrophy than standard curls (Maeo et al., 2022). Let the arm hang fully before each rep.</div>
+  </div>
+
+  <div class="ex">
+    <div class="ex-body">
+      <div class="ex-top"><div class="ex-num">09</div><div class="ex-main"><div class="ex-name">Overhead cable tricep ext.</div><div class="ex-target">Triceps long head</div></div></div>
+    </div>
+    <div class="ex-chips"><span class="chip chip-arms">2 × 12–15</span><span class="chip chip-rest">Rest 50 s</span></div>
+    <div class="cue-row" onclick="cue(this)"><span class="cue-lbl">Cue &amp; rationale</span><span class="cue-arr">▾</span></div>
+    <div class="cue-body">Shoulder flexion fully elongates the long head — greatest stretch-mediated tricep stimulus (Oranchuk et al., 2019). Elbows stay pointed forward; don't let them flare.</div>
+  </div>
+</div>
+  </div>
+</div>
+
+
+<!-- ═══════════ SESSION B ═══════════ -->
+<div class="pg" id="pg-b">
+
+  <div class="hero">
+    <div class="hero-eyebrow">Full body · Session two</div>
+    <div class="hero-title">WORK<br>OUT <span class="accent">B</span></div>
+    <div class="hero-sub">OHP · Cable row · Back extension · Arms</div>
+    <div class="stats-bar">
+      <div class="stat"><div class="stat-n">60</div><div class="stat-l">Minutes</div></div>
+      <div class="stat"><div class="stat-n">42</div><div class="stat-l">Upper</div></div>
+      <div class="stat"><div class="stat-n">10</div><div class="stat-l">Lower</div></div>
+      <div class="stat"><div class="stat-n">8</div><div class="stat-l">Arms</div></div>
+    </div>
+  </div>
+
+  <!-- UPPER B -->
+  <div class="phase-band upper">
+    <div class="phase-name">Upper body</div>
+  </div>
+
+  <div class="ex">
+    <div class="ex-body">
+      <div class="ex-top"><div class="ex-num">01</div><div class="ex-main"><div class="ex-name">Overhead press</div><div class="ex-target">Anterior + medial delt · Triceps</div></div></div>
+    </div>
+    <div class="ex-chips"><span class="chip chip-sets">3 × 8–12</span><span class="chip chip-rest">Rest 90 s</span></div>
+    <div class="cue-row" onclick="cue(this)"><span class="cue-lbl">Cue &amp; rationale</span><span class="cue-arr">▾</span></div>
+    <div class="cue-body">DB or BB, seated or standing. Full ROM overhead creates the greatest deltoid stretch. Shifts emphasis to anterior and medial delt relative to Session A's incline press. Superset with cable row to save time.</div>
+  </div>
+
+  <div class="ex">
+    <div class="ex-body">
+      <div class="ex-top"><div class="ex-num">02</div><div class="ex-main"><div class="ex-name">Seated cable row</div><div class="ex-target">Mid traps · Rhomboids · Rear delt</div></div></div>
+    </div>
+    <div class="ex-chips"><span class="chip chip-sets">3 × 10–15</span><span class="chip chip-posture">↑ Posture</span><span class="chip chip-rest">Rest 90 s</span></div>
+    <div class="cue-row" onclick="cue(this)"><span class="cue-lbl">Cue &amp; rationale</span><span class="cue-arr">▾</span></div>
+    <div class="cue-body">Wide grip. Full arm extension on each rep — let the scapulae protract at the front to load the mid traps at their longest position. Horizontal pull drives scapular retraction, countering the internal rotation from pressing and serving.</div>
+  </div>
+
+  <div class="ex">
+    <div class="ex-body">
+      <div class="ex-top"><div class="ex-num">03</div><div class="ex-main"><div class="ex-name">Single-arm cable row</div><div class="ex-target">Lats · Rhomboids · Mid traps</div></div></div>
+    </div>
+    <div class="ex-chips"><span class="chip chip-sets">2 × 10–12/side</span><span class="chip chip-posture">↑ Posture</span><span class="chip chip-rest">Rest 60 s</span></div>
+    <div class="cue-row" onclick="cue(this)"><span class="cue-lbl">Cue &amp; rationale</span><span class="cue-arr">▾</span></div>
+    <div class="cue-body">Unilateral — allows full torso rotation and greater lat stretch at full extension. Neutral grip. Addresses left-right imbalances created by asymmetric tennis demands on the dominant arm.</div>
+  </div>
+
+  <div class="ex">
+    <div class="ex-body">
+      <div class="ex-top"><div class="ex-num">04</div><div class="ex-main"><div class="ex-name">DB lateral raise</div><div class="ex-target">Medial deltoid</div></div></div>
+    </div>
+    <div class="ex-chips"><span class="chip chip-sets">2 × 15–20</span><span class="chip chip-rest">Rest 50 s</span></div>
+    <div class="cue-row" onclick="cue(this)"><span class="cue-lbl">Cue &amp; rationale</span><span class="cue-arr">▾</span></div>
+    <div class="cue-body">Slight forward lean, thumbs slightly down. DB peaks at the top — loading the shortened position. Paired with Session A's cable version, both sessions together train the full force-length curve of the medial delt.</div>
+  </div>
+
+  <div class="ex">
+    <div class="ex-body">
+      <div class="ex-top"><div class="ex-num">05</div><div class="ex-main"><div class="ex-name">Band pull-apart</div><div class="ex-target">Rear delt · External rotators · Mid traps</div></div></div>
+    </div>
+    <div class="ex-chips"><span class="chip chip-sets">2 × 20–25</span><span class="chip chip-posture">↑ Posture</span><span class="chip chip-rest">Rest 30 s</span></div>
+    <div class="cue-row" onclick="cue(this)"><span class="cue-lbl">Cue &amp; rationale</span><span class="cue-arr">▾</span></div>
+    <div class="cue-body">Supinated grip, arms at shoulder height. Purpose is postural reinforcement — keep it light. Superset with OHP to save time. Complements Session A's face pull for full rear delt coverage across the week.</div>
+  </div>
+
+  <div class="gap"></div>
+
+  <!-- LOWER B -->
+  <div class="phase-band lower">
+    <div class="phase-name">Lower body</div>
+  </div>
+
+  <div class="ex lime-ex">
+    <div class="ex-body">
+      <div class="ex-top"><div class="ex-num">06</div><div class="ex-main"><div class="ex-name">Back extension</div><div class="ex-target">Spinal erectors · Glutes · Hamstrings</div></div></div>
+    </div>
+    <div class="ex-chips"><span class="chip chip-lower">3 × 12–15</span><span class="chip chip-posture">↑ Posture</span><span class="chip chip-rest">Rest 60 s</span></div>
+    <div class="cue-row" onclick="cue(this)"><span class="cue-lbl">Cue &amp; rationale</span><span class="cue-arr">▾</span></div>
+    <div class="cue-body">Hold a plate to chest for progressive overload. Directly targets spinal erectors — the most posturally significant muscle group. Lumbar extension is systematically undertrained. Pairs with Session A's RDL to cover the posterior chain from two angles.</div>
+  </div>
+
+  <div class="ex lime-ex">
+    <div class="ex-body">
+      <div class="ex-top"><div class="ex-num">07</div><div class="ex-main"><div class="ex-name">Hip adduction</div><div class="ex-target">Adductor magnus · Longus · Gracilis</div></div></div>
+    </div>
+    <div class="ex-chips"><span class="chip chip-lower">2 × 12–15</span><span class="chip chip-rest">Rest 60 s</span></div>
+    <div class="cue-row" onclick="cue(this)"><span class="cue-lbl">Cue &amp; rationale</span><span class="cue-arr">▾</span></div>
+    <div class="cue-body">Set range to full stretch. Adductors contribute substantially to hip extension and are undertrained in most programs including tennis. Loaded stretch at full abduction is the primary hypertrophic stimulus.</div>
+  </div>
+
+  <div class="gap"></div>
+
+  <!-- ARMS B -->
+  <div class="phase-band arms">
+    <div class="phase-name">Arm block</div>
+  </div>
+
+  <div class="ex">
+    <div class="ex-body">
+      <div class="ex-top"><div class="ex-num">08</div><div class="ex-main"><div class="ex-name">EZ-bar curl</div><div class="ex-target">Biceps long head</div></div></div>
+    </div>
+    <div class="ex-chips"><span class="chip chip-arms">2 × 10–15</span><span class="chip chip-rest">Rest 50 s</span></div>
+    <div class="cue-row" onclick="cue(this)"><span class="cue-lbl">Cue &amp; rationale</span><span class="cue-arr">▾</span></div>
+    <div class="cue-body">Full shoulder extension at the bottom — arms slightly behind the body if possible. Different tension pattern to Session A's incline curl — standing, free-path, greater overload potential as strength develops.</div>
+  </div>
+
+  <div class="ex">
+    <div class="ex-body">
+      <div class="ex-top"><div class="ex-num">09</div><div class="ex-main"><div class="ex-name">Tricep rope pushdown</div><div class="ex-target">Triceps lateral head</div></div></div>
+    </div>
+    <div class="ex-chips"><span class="chip chip-arms">2 × 12–15</span><span class="chip chip-rest">Rest 50 s</span></div>
+    <div class="cue-row" onclick="cue(this)"><span class="cue-lbl">Cue &amp; rationale</span><span class="cue-arr">▾</span></div>
+    <div class="cue-body">Elbows pinned to sides, full extension at the bottom. Targets the lateral head — different emphasis to Session A's overhead extension which hits the long head. Together all three tricep heads are covered across the week.</div>
+  </div>
+</div>
+  </div>
+</div>
+
+
+<!-- ═══════════ ABOUT ═══════════ -->
+<div class="pg" id="pg-info">
+
+  <div class="info-hero">
+    <div class="hero-eyebrow">Evidence-based design</div>
+    <div class="info-title">PROGRAM<br><span class="accent">LOGIC</span></div>
+    <div class="info-tagline">Full body A/B · 3× per week · 60 minutes · Upper body emphasis · CNS-friendly · Postural focus · Tennis-aware</div>
+  </div>
+
+  <div class="info-sec">
+    <div class="info-sec-title">Structure</div>
+    <div class="info-item"><b>Full body A/B, 3×/week.</b> Sessions alternate A-B-A one week, B-A-B the next. Each session runs 1.5× per week on average, giving every muscle three stimuli per week.</div>
+    <div class="info-item"><b>Upper to lower ratio is 4:1.</b> Tennis already provides substantial quad, glute, and calf loading. Gym lower work targets only what tennis undertrained — posterior chain and adductors.</div>
+    <div class="info-item"><b>The arm block is protected.</b> Eight minutes at the end of every session — built into the budget, not squeezed in when time permits.</div>
+  </div>
+
+  <div class="info-sec">
+    <div class="info-sec-title">Why this works</div>
+    <div class="info-item"><b>Mechanical tension at long muscle lengths</b> is the strongest hypertrophic signal in the current literature. A muscle loaded at its stretched position grows more than the same muscle loaded shortened, even with identical sets and reps (Maeo et al., 2021; Pedrosa et al., 2022).</div>
+    <div class="info-item"><b>Proximity to failure.</b> Sets must be within 1–2 reps of failure (RIR 1–2) for high-threshold motor unit recruitment. Growth stimulus drops sharply below this threshold (Schoenfeld, 2010).</div>
+    <div class="info-item"><b>Frequency.</b> Each muscle is trained ~3× per week via alternating sessions. The advantage over 2× per week is moderate but real when volume is equated (Schoenfeld et al., 2016).</div>
+  </div>
+
+  <div class="info-sec">
+    <div class="info-sec-title">What changes A → B</div>
+    <div class="info-item"><b>Push.</b> Incline press (A) targets clavicular pec and anterior delt. Overhead press (B) shifts to anterior and medial delt. Different prime movers, different stretch angles.</div>
+    <div class="info-item"><b>Pull.</b> Pull-up / pulldown (A) is a vertical pull — primary lat. Seated cable row (B) is horizontal — primary mid traps and rhomboids. Full back covered across the week.</div>
+    <div class="info-item"><b>Lateral delt.</b> Cable raise (A) peaks at the bottom — stretched position. DB raise (B) peaks at the top — shortened position. Together they train the full force-length curve.</div>
+    <div class="info-item"><b>Lower compound.</b> RDL (A) targets proximal hamstrings. Back extension (B) targets spinal erectors and distal glutes. Full posterior chain covered from two angles.</div>
+    <div class="info-item"><b>Arms.</b> Incline curl + overhead extension (A) target long heads at maximal stretch. EZ-bar curl + rope pushdown (B) cover standing ROM and lateral head. Stretch-biased throughout.</div>
+  </div>
+
+  <div class="info-sec">
+    <div class="info-sec-title">Weekly volume per muscle</div>
+    <div class="vol-row"><span class="vol-label">Chest</span><span class="vol-val">~9 sets</span></div>
+    <div class="vol-row"><span class="vol-label">Lats / back</span><span class="vol-val">~15 sets</span></div>
+    <div class="vol-row"><span class="vol-label">Rear delt / traps</span><span class="vol-val">~9 sets</span></div>
+    <div class="vol-row"><span class="vol-label">Medial delt</span><span class="vol-val">~6 sets</span></div>
+    <div class="vol-row"><span class="vol-label">Biceps</span><span class="vol-val">~6 sets</span></div>
+    <div class="vol-row"><span class="vol-label">Triceps</span><span class="vol-val">~9 sets</span></div>
+    <div class="vol-row"><span class="vol-label">Hamstrings</span><span class="vol-val">~5 sets</span></div>
+    <div class="vol-row"><span class="vol-label">Spinal erectors</span><span class="vol-val">~5 sets</span></div>
+    <div class="vol-row"><span class="vol-label">Adductors</span><span class="vol-val">~3 sets</span></div>
+    <div class="vol-row"><span class="vol-label">Quads</span><span class="vol-val">~3 sets + tennis</span></div>
+  </div>
+
+  <div class="prog-sec">
+    <div class="prog-title">Progressive overload</div>
+    <div class="prog-body">Once you complete all sets at the top of the rep range with RIR ≥ 2, increase load by the smallest available increment and reset to the bottom. <b>Microplates</b> (0.5–1.25 kg) are strongly recommended for upper body lifts. Re-evaluate exercise selection every <b>6–8 weeks</b>. If tennis load increases significantly, reduce gym lower volume first — it is the most redundant block.</div>
+  </div>
+
+  <footer>
+    Schoenfeld BJ (2010) J Strength Cond Res · Maeo S et al. (2021, 2022) J Physiology · Pedrosa GF et al. (2022) Eur J Sport Sci · Oranchuk DJ et al. (2019) Scand J Med Sci Sports · Lauver JD et al. (2016) J Hum Kinet · Signorile JF et al. (2002) J Strength Cond Res · Schoenfeld BJ et al. (2016) J Strength Cond Res<br><br>
+    For intermediate trainees with concurrent sport demands. Consult a sports medicine physician before commencing any new resistance training program.
+  </footer>
+
+</div>
+
+<script>
+function show(id,tab){
+  document.querySelectorAll('.pg').forEach(function(p){p.classList.remove('on');});
+  document.querySelectorAll('.nav-tab').forEach(function(t){t.classList.remove('on');});
+  document.getElementById('pg-'+id).classList.add('on');
+  tab.classList.add('on');
+  window.scrollTo(0,0);
+}
+function cue(toggle){
+  toggle.closest('.ex').classList.toggle('open');
+}
+</script>
+</body>
+</html>
